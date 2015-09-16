@@ -1,0 +1,60 @@
+apply plugin: 'java'
+apply plugin: 'checkstyle'
+//apply plugin: 'pmd'
+apply plugin: 'findbugs'
+apply plugin: 'eclipse'
+
+// 全局属性设置
+ext {
+	junitVersion = "4.11"
+	mongoVersion = "2.12.2"
+    
+    // java文件编码方式设置为utf-8
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+}
+
+version = '1.0'
+group = 'org.alpha.mongo'
+
+jar {
+    manifest {
+        attributes 'Main-Class':'org.alpha.mongo.thread.Main'
+    }
+}
+
+repositories {
+	mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile (
+    	"log4j:log4j:1.2.17",
+    	"org.mongodb:mongo-java-driver:${mongoVersion}",
+    	"org.apache.commons:commons-lang3:3.3",
+    	group:'redis.clients', name: 'jedis', version:'2.6.0'
+    	//fileTree(dir:"lib", include:"*.jar")
+    )
+    testCompile group: "junit", name: "junit", version: "4+"
+}
+
+checkstyle {
+	ignoreFailures = true
+	sourceSets = [sourceSets.main]
+}
+
+findbugs {
+	ignoreFailures = true
+	sourceSets = [sourceSets.main]
+}
+
+/*
+pmd {
+	ruleSets = ["basic", "braces", "design"]
+	ignoreFailures = true
+	sourceSets = [sourceSets.main]	
+}
+*/
