@@ -1,8 +1,8 @@
 apply plugin: 'java'
-apply plugin: 'checkstyle'
-//apply plugin: 'pmd'
-apply plugin: 'findbugs'
 apply plugin: 'eclipse'
+//apply plugin: 'checkstyle'
+//apply plugin: 'pmd'
+//apply plugin: 'findbugs'
 
 // 全局属性设置
 ext {
@@ -12,8 +12,8 @@ ext {
     // java文件编码方式设置为utf-8
     compileJava.options.encoding = 'UTF-8'
     compileTestJava.options.encoding = 'UTF-8'
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
 }
 
 version = '1.0'
@@ -41,6 +41,7 @@ dependencies {
     testCompile group: "junit", name: "junit", version: "4+"
 }
 
+/*
 checkstyle {
 	ignoreFailures = true
 	sourceSets = [sourceSets.main]
@@ -51,7 +52,7 @@ findbugs {
 	sourceSets = [sourceSets.main]
 }
 
-/*
+
 pmd {
 	ruleSets = ["basic", "braces", "design"]
 	ignoreFailures = true
